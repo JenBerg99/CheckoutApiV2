@@ -89,7 +89,7 @@ Die Konfigurationsdateien befinden sich im Ordner `bin/Debug/`:
 - `appsettings.Production.json` – Produktionskonfiguration
 
 ## Tests
-Um die Tests auszuführen, verwende:
+Um die Tests auszuführen, welchsel in das Verzeichnis 'CheckoutApiV2\Tests\CheckoutApiV2.Test' verwende:
 ```bash
 dotnet test
 ```
