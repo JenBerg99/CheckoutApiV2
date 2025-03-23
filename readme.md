@@ -74,14 +74,13 @@ cd CheckoutApiV2
 ```
 3. Erstellen eines neuen Images:
 ```bash
-docker build -t checkoutApiV2 -f ./Dockerfile .
+docker build -t checkoutapiv2 -f ./Dockerfile .
 ```
 4. Für Erstellung von Docker Cmpose ins Hauptverzeichnis wo die Compose File liegt:
 ```bash
-docker compose -f "docker-compose.yml" -p composeCheckout up -d
+docker compose -f "docker-compose.yml" -p composecheckout up -d
 ```
 5. Die API sollte unter http://localhost:8080/swagger/index.html erreichbar sein
-```
 
 ## Konfiguration
 Die Konfigurationsdateien befinden sich im Ordner `bin/Debug/`:
@@ -90,7 +89,7 @@ Die Konfigurationsdateien befinden sich im Ordner `bin/Debug/`:
 - `appsettings.Production.json` – Produktionskonfiguration
 
 ## Tests
-Um die Tests auszuführen, verwende:
+Um die Tests auszuführen, welchsel in das Verzeichnis 'CheckoutApiV2\Tests\CheckoutApiV2.Test' verwende:
 ```bash
 dotnet test
 ```
