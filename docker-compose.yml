@@ -1,0 +1,26 @@
+services:
+  checkoutapiv2:
+    image: ${DOCKER_REGISTRY-}checkoutapiv2
+    build:
+      context: .
+      dockerfile: CheckoutApiV2/Dockerfile
+    ports:
+        - "8080:8080"
+        - "8081:8081"
+    environment:
+      - DB_HOST=checkout.database
+    depends_on:
+      - checkout.database
+
+
+  checkout.database:
+    image: postgres:latest
+    container_name: checkout.database
+    environment:
+        - POSTGRES_DB=checkout
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=admin12345678
+    volumes:
+        - ./.containers/checkout-db:/var/lib/postgressql/data
+    ports:
+        - 5432:5432

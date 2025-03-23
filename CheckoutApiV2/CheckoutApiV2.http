@@ -1,0 +1,6 @@
+@CheckoutApiV2_HostAddress = http://localhost:5290
+
+GET {{CheckoutApiV2_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
