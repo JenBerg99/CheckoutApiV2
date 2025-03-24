@@ -35,33 +35,25 @@ CheckoutApiV2/
 - GNU Make (für ausführung von Makefiles)
 
 
-<!-- ## Einrichtung in AWS (leider nicht hin bekommen)
+## Einrichtung in AWS (leider nicht hin bekommen)
 1. Repository klonen:
 ```bash
 git clone <repository-url>
 ```
-2. In das Projektverzeichnis wechseln, wo das Makefile liegt:
-```bash
-cd CheckoutApiV2
-cd CheckoutApiV2
-```
+2. Benutzer in AWS erstellen mit genügend Berechtigung (root oder AdministratorAccess)
 3. Anmelden in AWS CLI:
 ```bash
 aws configure
 ```
-4. Terraform Umgebung erstellen:
+4. Ins Verzeichniss von makefile wechseln und deployAll aufrufen:
 ```bash
-make bootstrap
+make deployAll
 ```
-5. Basis AWS Umgebung erstellen:
+5. Prüfe output nach app_url - zum Beispiel
 ```bash
-make deployBase
+app_url = load-balancer-checkout-83493227.eu-north-1.elb.amazonaws.com
 ```
-6. Doker Image erstellen und pushen & Services neu starten:
-```bash
-make restartService
-``` -->
-
+5. Die API sollte unter http://load-balancer-checkout-83493227.eu-north-1.elb.amazonaws.com:8080/swagger/index.html erreichbar sein
 
 ## Docker unterstützung
 1. Repository klonen:
@@ -74,11 +66,11 @@ cd CheckoutApiV2
 ```
 3. Erstellen eines neuen Images:
 ```bash
-docker build -t checkoutApiV2 -f ./Dockerfile .
+docker build -t checkoutapiv2 -f ./Dockerfile .
 ```
 4. Für Erstellung von Docker Cmpose ins Hauptverzeichnis wo die Compose File liegt:
 ```bash
-docker compose -f "docker-compose.yml" -p composeCheckout up -d
+docker compose -f "docker-compose.yml" -p composecheckout up -d
 ```
 5. Die API sollte unter http://localhost:8080/swagger/index.html erreichbar sein
 
