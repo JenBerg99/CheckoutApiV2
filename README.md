@@ -15,7 +15,7 @@ CheckoutApiV2/
 │   ├── ServiceIntegrationTests
 ├── docker-compose.yml
 ├── launchSettings.json
-├── bin/
+├── CheckoutApiV2/
 │   ├── Dockerfile
 │   ├── Makefile
 │   ├── Programm.cs
