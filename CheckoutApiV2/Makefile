@@ -2,7 +2,6 @@ AWS_ACCOUNT_ID = $(shell aws sts get-caller-identity --query "Account" --output 
 AWS_REGION = eu-north-1
 REPO_NAME = checkoutapiv2
 IMAGE_TAG = latest
-ECR_URL = $(shell cd ../Terraform-Main && terraform output -raw ecr_image_url)
 
 # ================================
 # AWS ECR Login
@@ -13,8 +12,8 @@ login:
 # ================================
 # Terraform Bootstrap Setup
 # ================================
-bootstrap:
-	cd ../Terraform-Bootstrap && terraform init && terraform apply -auto-approve
+init:
+	cd ../Terraform-Main && terraform init
 
 # ================================
 # Docker Build & Push
@@ -23,10 +22,10 @@ build:
 	docker build -t $(REPO_NAME) -f ./Dockerfile .
 
 tag:
-	docker tag $(REPO_NAME):latest $(ECR_URL)
+	docker tag $(REPO_NAME):latest  $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(REPO_NAME):latest
 
 push: login build tag
-	docker push $(ECR_URL)
+	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(REPO_NAME):latest
 
 # ================================
 # Deployment with Terraform
@@ -37,5 +36,5 @@ deployBase:
 deploy: push
 	cd ../Terraform-Main && terraform apply -auto-approve
 
-restartService: push deploy
-	aws ecs update-service --cluster checkout-cluster --service checkout-api-service --force-new-deployment
+deployAll: init deployBase deploy
+	aws ecs update-service --cluster checkoutapiv2 --service checkout-service --force-new-deployment
