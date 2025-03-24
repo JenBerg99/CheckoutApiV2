@@ -35,7 +35,7 @@ CheckoutApiV2/
 - GNU Make (für ausführung von Makefiles)
 
 
-## Einrichtung in AWS (leider nicht hin bekommen)
+## Einrichtung in AWS
 1. Repository klonen:
 ```bash
 git clone <repository-url>
